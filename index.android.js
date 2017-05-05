@@ -8,17 +8,46 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
+  Button,
   Text,
   View
 } from 'react-native';
-
+ var tts = require('react-native-android-speech');
 export default class AwesomeProject extends Component {
+  constructor(props){
+   super(props);
+   this.textToSpeech=this.textToSpeech.bind(this);
+  }
+  textToSpeech(){
+  tts.getLocales().then(locales=>{
+    console.log(locales)
+  });
+  tts.speak({
+    text:'Please provide some text to speak.', // Mandatory
+    pitch:1.5, // Optional Parameter to set the pitch of Speech,
+    forceStop : false , //  Optional Parameter if true , it will stop TTS if it is already in process
+    language : 'en', // Optional Paramenter Default is en you can provide any supported lang by TTS
+    country : 'US' // Optional Paramenter Default is null, it provoques that system selects its default
+}).then(isSpeaking=>{
+    //Success Callback
+    console.log(isSpeaking);
+}).catch(error=>{
+    //Errror Callback
+    console.log(error)
+});
+}
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
+        <Button
+          onPress={this.textToSpeech}
+          title="Learn More"
+          color="#841584"
+          accessibilityLabel="Learn more about this purple button"
+        />
         <Text style={styles.instructions}>
           To get started, edit index.android.js
         </Text>
