@@ -5,6 +5,12 @@
  */
 
 import React, { Component } from 'react';
+import ReactNative from 'react-native';
+
+import {
+  StackNavigator,
+} from 'react-navigation';
+
 import {
   AppRegistry,
   StyleSheet,
@@ -12,71 +18,57 @@ import {
   Text,
   View
 } from 'react-native';
- var tts = require('react-native-android-speech');
+
+import  HomeScene from './src/scenes/HomeScene';
+import  CreateReciepe from './src/scenes/CreateReciepe';
+import  PlayReciepe from './src/scenes/PlayReciepe';
+const styles = require('./src/style/styles.js');
+
+
 export default class AwesomeProject extends Component {
+
   constructor(props){
    super(props);
-   this.textToSpeech=this.textToSpeech.bind(this);
+     this.clickMe=this.clickMe.bind(this);
   }
-  textToSpeech(){
-  tts.getLocales().then(locales=>{
-    console.log(locales)
-  });
-  tts.speak({
-    text:'Please provide some text to speak.', // Mandatory
-    pitch:1.5, // Optional Parameter to set the pitch of Speech,
-    forceStop : false , //  Optional Parameter if true , it will stop TTS if it is already in process
-    language : 'en', // Optional Paramenter Default is en you can provide any supported lang by TTS
-    country : 'US' // Optional Paramenter Default is null, it provoques that system selects its default
-}).then(isSpeaking=>{
-    //Success Callback
-    console.log(isSpeaking);
-}).catch(error=>{
-    //Errror Callback
-    console.log(error)
-});
-}
+
+  clickMe(type) {
+    alert("hai"+type);
+    const { navigate } = this.props.navigation;
+    if(type=='create'){
+          navigate('Create',{'profileData':this.props});
+    } else if(type=='play'){
+          navigate('Play',{'profileData':this.props});
+    }
+  }
   render() {
+    var testData={name:'thaveethu VIGNESH',age:24};
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
+      <HomeScene data={testData} />
         <Button
-          onPress={this.textToSpeech}
-          title="Learn More"
+          onPress={this.clickMe.bind(this,'create')}
+          title="Go Create"
           color="#841584"
           accessibilityLabel="Learn more about this purple button"
         />
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
+
+        <Button
+          onPress={this.clickMe.bind(this,'play')}
+          title="Go Play"
+          color="#841584"
+          accessibilityLabel="Learn more about this purple button"
+        />
+
+        </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+const App = StackNavigator({
+  Home :{screen: AwesomeProject},
+  Create: {screen: CreateReciepe},
+  Play :{screen: PlayReciepe}
+  });
 
-AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);
+AppRegistry.registerComponent('AwesomeProject', () => App);
