@@ -50,7 +50,7 @@ export default class HomeScreen extends Component {
 header: null
   };
   clickMe(type) {
-    alert("hai"+type);
+    
     const { navigate } = this.props.navigation;
     if(type=='create'){
           navigate('Create',{'profileData':this.props});

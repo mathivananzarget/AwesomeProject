@@ -97,8 +97,14 @@ constructor(){
 
   render() {
     return (
-           <Container style={{ backgroundColor: '#FFF',margin:8}}>
-        {this.renderSelected()}
+       <Container style={{ backgroundColor: '#FFF',margin:8}}>
+       
+     <Content>
+        <Grid>
+        <Row style={{ backgroundColor: '#FFF8EE'}}>
+         {this.renderSelected()}
+         </Row>
+        <Row style={{ backgroundColor: '#FFF8EE', height: 300 }}>
         <Timeline 
           style={stylesnew.list}
           data={this.data}
@@ -114,7 +120,9 @@ constructor(){
           onEventPress={this.onEventPress}
           renderDetail={this.renderDetail}
         />
-
+		</Row>
+		</Grid>
+        </Content>
             </Container>
     );
   }

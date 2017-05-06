@@ -58,7 +58,7 @@ header: null
   }
 
   componentWillUnmount() {
-    alert("called");
+    //alert("called");
     clearTimeout(this._timer);
 
   }
@@ -75,13 +75,13 @@ header: null
     }, 1000);
   }
 
-  clickMe(type) {
-    alert("hai"+type);
+  clickMe(type,resp) {
     const { navigate } = this.props.navigation;
+   // alert(resp);
     if(type=='create'){
           navigate('Create',{'profileData':this.props});
     } else if(type=='play'){
-          navigate('Play',{'profileData':this.props});
+          navigate('Play',{'type':resp});
     }
   }
   render() {
@@ -123,16 +123,16 @@ header: null
                 </Row>
                 <Row style={{ backgroundColor: '#FFF8EE' , margin:10,marginTop:0,height:440  }}>
                 <Col>
-                    <ListItem onPress={this.clickMe.bind(this,'play')} style={{ height: 80 }}>
+                    <ListItem onPress={this.clickMe.bind(this,'play','briyani')} style={{ height: 80 }}>
                         <Text>Briyani</Text>
                     </ListItem>
-                    <ListItem style={{ height: 80 }}>
+                    <ListItem onPress={this.clickMe.bind(this,'play','sambar')} style={{ height: 80 }}>
                         <Text>Sambar</Text>
                     </ListItem>
-                    <ListItem style={{ height: 80 }}>
+                    <ListItem onPress={this.clickMe.bind(this,'play','muttonbriyani')} style={{ height: 80 }}>
                         <Text>Mutton Briyani</Text>
                     </ListItem>
-                    <ListItem style={{ height: 80 }}>
+                    <ListItem onPress={this.clickMe.bind(this,'play','chickenrice')} style={{ height: 80 }}>
                         <Text>Chicken Rice</Text>
                     </ListItem>
                     </Col>
