@@ -54,6 +54,17 @@ var styles = StyleSheet.create({
     color: '#444',
     fontSize: 16,
     fontWeight: "500"
+  },
+
+    actionButtonIcon: {
+    fontSize: 20,
+    height: 22,
+    color: 'white',
+  },
+  iconButtonIcon:{
+    fontSize: 22,
+    margin:8,
+    height: 42
   }
 })
 
