@@ -46,7 +46,7 @@ constructor(props){
         timeInt:0,
         isActive:false,
         title: 'Archery Training', 
-        description: 'vayya moodu da loosu ,The briyani Beginner Archery and Beginner Crossbow course does not require you to bring any equipment, since everything you need will be provided for the course. ',
+        description: 'The briyani Beginner Archery and Beginner Crossbow course does not require you to bring any equipment, since everything you need will be provided for the course. ',
         lineColor:'#009688', 
         imageUrl: 'https://cloud.githubusercontent.com/assets/21040043/24240340/c0f96b3a-0fe3-11e7-8964-fe66e4d9be7a.jpg'
       },

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactNative from 'react-native';
 import Timeline from 'react-native-timeline-listview';
+var Slider = require('react-native-slider');
 
 const {
   AppRegistry,
@@ -18,7 +19,15 @@ import { Container, Content, ListItem, Text ,Button, Thumbnail} from 'native-bas
 import { Col, Row, Grid } from 'react-native-easy-grid';
 
  var tts = require('react-native-android-speech');
- const styles = require('../style/styles.js');
+var styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginLeft: 10,
+    marginRight: 10,
+    alignItems: 'stretch',
+    justifyContent: 'center',
+  },
+});
 
   import {
   StackNavigator,
@@ -64,7 +73,7 @@ constructor(){
         imageUrl: 'https://cloud.githubusercontent.com/assets/21040043/24240422/20d84f6c-0fe4-11e7-8f1d-9dbc594d0cfa.jpg'
       }
     ]
-    this.state = {selected: null}
+    this.state = {selected: null,inText:'',value: 0};
   } 
 
   onEventPress(data){
@@ -94,6 +103,10 @@ constructor(){
       </View>
     )
   }
+  onButtonCall(){
+  	alert("Added!");
+  	this.setState({inText:''});
+  }
 
   render() {
     return (
@@ -104,7 +117,7 @@ constructor(){
         <Row style={{ backgroundColor: '#FFF8EE'}}>
          {this.renderSelected()}
          </Row>
-        <Row style={{ backgroundColor: '#FFF8EE', height: 300 }}>
+        <Row style={{ backgroundColor: '#FFF8EE', height: 200 }}>
         <Timeline 
           style={stylesnew.list}
           data={this.data}
@@ -121,7 +134,42 @@ constructor(){
           renderDetail={this.renderDetail}
         />
 		</Row>
-		</Grid>
+		 
+		 </Grid>
+		<Grid style={{ backgroundColor: '#FFF',margin:20}}>
+		 <Row style={{ backgroundColor: '#FFF',height: 120,margin:10}}>
+		<View style={styles.container}>
+        <Slider
+          value={this.state.value}
+          onValueChange={(value) => this.setState({value})} />
+        <Text>Time: {this.state.value}</Text>
+      </View>
+          </Row>
+          </Grid>
+		<Grid style={{ backgroundColor: '#FFF',margin:20}}>
+		 
+		 <Row style={{ backgroundColor: '#FFF',height: 100}}>
+		 <Grid>
+              <Col>
+			<TextInput
+	        style={{height: 40}}
+	        onChangeText={(inText) => this.setState({inText})}
+	        value={this.state.inText}
+	      />
+	      </Col>
+	      <Col>
+	      <Button
+            onPress={this.onButtonCall.bind(this)}
+            title="Ok!"
+            backgroundColor='#9b59b6'
+            color="#9b59b6"
+
+            accessibilityLabel="Next!">
+            <Text>Next</Text></Button>
+	      </Col>
+	      </Grid>
+		 </Row>
+		 </Grid>
         </Content>
             </Container>
     );
